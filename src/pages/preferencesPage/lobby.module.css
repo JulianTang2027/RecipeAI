@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    overflow: hidden;
+}
+
+.lobbyPage {
+    width: 100vw;
+    height: 100vh;
+}
+
+.header {
+    width: 100vw;
+    height: 10vh;
+    background-color: var(--teal);
+}
+
+.lobbyPINcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin-left: 4em;
+}
+
+.lobbyPINheader {
+    color: white;
+    font-weight: bold;
+}
+
+.lobbyPIN {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.dinersBoxWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 70vw;
+}

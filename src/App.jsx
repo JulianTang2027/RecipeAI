@@ -1,16 +1,24 @@
 import styles from './App.module.css'
 import UploadBox from './components/uploadBox/uploadBox'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
+import HomePage from './pages/homePage/homePage';
+import PickRoomPage from './pages/pickRoomPage/pickRoomPage';
+import Lobby from './pages/preferencesPage/lobby';
 
 function App() {
 
   return (
-    <div className={styles.homePage}>
-      <div className={styles.headerContainer}>
-        <h2 className={styles.recipeAIheader}>Welcome to RecipeAI</h2>
-        <h3 className={styles.recipeAIsubheader}>Submit a link to a tiktok or ig reel below!</h3>
-        <UploadBox></UploadBox>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage></HomePage>}></Route>
+        <Route path="/pick" element={<PickRoomPage></PickRoomPage>}></Route>
+        <Route path="/lobby" element={<Lobby></Lobby>}></Route>
+      </Routes>
+    </Router>
   )
 }
 
