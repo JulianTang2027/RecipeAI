@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto;
+}
+
+body, html {
+    overflow: hidden;
+}
+
+.uploadBox {
+    width: 50vw;
+    height: 40vh;
+    color: var(--teal);
+    border: 4px solid var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploadSegment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.uploadButton {
+    border: none;
+    outline: none;
+    background-color: var(--teal);
+    cursor: pointer;
+    border-radius: 15px;
+    width: 170px;
+    height: 70px;
+}
+
+.uploadButton:hover {
+    opacity: .8;
+}
