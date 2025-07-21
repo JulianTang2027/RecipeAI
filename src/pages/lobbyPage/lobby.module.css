@@ -10,23 +10,28 @@ body, html {
 .lobbyPage {
     width: 100vw;
     height: 100vh;
+    background-color: var(--teal);
 }
 
 .header {
     width: 100vw;
     height: 10vh;
-    background-color: var(--teal);
+    background-color: var(--lightteal);
+    box-shadow: 0 0 5px rgb(0,0,0);
 }
 
 .lobbyPINcontainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 100%;
     margin-left: 4em;
 }
 
 .lobbyPINheader {
+    display: block;
+    text-align: left;
     color: white;
     font-weight: bold;
 }
@@ -34,12 +39,20 @@ body, html {
 .lobbyPIN {
     font-weight: bold;
     font-size: 28px;
+    color: white;
 }
 
-.dinersBoxWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.dinersCardBox {
+    width: 100%;
     height: 90vh;
-    width: 70vw;
+}
+
+.startBtn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.startBtn:hover {
+    opacity: .8;
 }

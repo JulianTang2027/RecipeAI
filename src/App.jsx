@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import HomePage from './pages/homePage/homePage';
 import PickRoomPage from './pages/pickRoomPage/pickRoomPage';
-import Lobby from './pages/preferencesPage/lobby';
+import Lobby from './pages/lobbyPage/lobby';
 
 function App() {
 
