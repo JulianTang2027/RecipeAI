@@ -11,7 +11,7 @@ const HomePage = () => {
     return (
             <div className={styles.homePage}>
               <div className={styles.headerContainer}>
-                <h2 className={styles.recipeAIheader}>Welcome to RecipeAI</h2>
+                <h2 className={styles.recipeAIheader}>Welcome to ForkCast</h2>
                 <h3 className={styles.recipeAIsubheader}>Solve all your dinner making struggles</h3>
                 <button onClick={handleClick} className={styles.startButton}>Get started!</button>
               </div>

@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './lobby.module.css';
-import DinersBox from '../../components/dinersBox/dinersBox';
 import DinersCard from '../../components/dinersCard/dinersCard';
 import { useNavigate } from 'react-router-dom';
 
-const Lobby = () => {
+const LobbyPage = () => {
+
+    const navigate = useNavigate();
 
     const cuisineArr = [
         'American',
@@ -33,8 +34,9 @@ const Lobby = () => {
         'Far!'
     ]
 
+    const dinerCount = '5';
+
     const handleStartClick = () => {
-        const navigate = useNavigate();
 
         navigate('/summary')
     }
@@ -43,16 +45,26 @@ const Lobby = () => {
         <div className={styles.lobbyPage}>
             <div className={styles.header}>
                 <div className={styles.lobbyPINcontainer}>
-                    <span className={styles.lobbyPINheader}>Join the lobby at eatery.io</span>
+                    <span className={styles.lobbyPINheader}>Join the lobby at ForkCast.io</span>
                     <span className={styles.lobbyPIN}>with lobby PIN 57892</span>
                 </div>
-                <div className={styles.dinersCardBox}>
-                    <button className={styles.startBtn}>Start</button>
-                    <DinersCard></DinersCard>
+                <div className={styles.lobbyContent}>
+                    <div className={styles.dinerContainer}>
+                        <div className={styles.dinerCountWrapper}>
+                            <span className={styles.dinerCountNumber}>{dinerCount}</span>
+                            <span className={styles.dinerCountText}>Diners</span>
+                        </div>
+                    </div>
+                    <div className={styles.dinersCardsWrapper}>
+                        <DinersCard></DinersCard>
+                    </div>
+                    <div className={styles.startBtnWrapper}>
+                        <button onClick={handleStartClick} className={styles.startBtn}>Start</button>
+                    </div>
                 </div>
             </div>
         </div>
     )
 }
 
-export default Lobby;
+export default LobbyPage;

@@ -5,13 +5,13 @@ const PickRoomPage = () => {
     const navigate = useNavigate();
 
     const handleCreateClick = () => {
-        navigate('/lobby');
+        navigate('/preference');
     }
 
     const handleJoinClick = (e) => {
         const pin = e.target.value;
 
-        navigate('/lobby');
+        navigate('/preference');
     }
 
     return (

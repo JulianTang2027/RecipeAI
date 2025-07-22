@@ -7,7 +7,10 @@ import {
 } from 'react-router-dom';
 import HomePage from './pages/homePage/homePage';
 import PickRoomPage from './pages/pickRoomPage/pickRoomPage';
-import Lobby from './pages/lobbyPage/lobby';
+import LobbyPage from './pages/lobbyPage/lobby';
+import SummaryPage from './pages/summaryPage/summaryPage';
+import RecommendationsPage from './pages/recommendationsPage/recommendationsPage';
+import PreferenceInputPage from './pages/preferenceInputPage/preferenceInputPage';
 
 function App() {
 
@@ -16,7 +19,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage></HomePage>}></Route>
         <Route path="/pick" element={<PickRoomPage></PickRoomPage>}></Route>
-        <Route path="/lobby" element={<Lobby></Lobby>}></Route>
+        <Route path="/preference" element={<PreferenceInputPage></PreferenceInputPage>}></Route>
+        <Route path="/lobby" element={<LobbyPage></LobbyPage>}></Route>
+        <Route path="/summary" element={<SummaryPage></SummaryPage>}></Route>
+        <Route path="/recommendations" element={<RecommendationsPage></RecommendationsPage>}></Route>
       </Routes>
     </Router>
   )
