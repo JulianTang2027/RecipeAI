@@ -19,6 +19,7 @@ body, html {
 }
 
 .uploadSegment {
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,13 +28,17 @@ body, html {
 .uploadButton {
     border: none;
     outline: none;
-    background-color: var(--teal);
-    cursor: pointer;
     border-radius: 15px;
     width: 170px;
     height: 70px;
 }
 
-.uploadButton:hover {
-    opacity: .8;
+input[type="text"] {
+    width: 50%;
+    border: 2px solid var(--teal);
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border: 4px solid var(--teal);
 }

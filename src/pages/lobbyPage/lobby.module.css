@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    overflow: hidden;
+}
+
+.lobbyPage {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--teal);
+}
+
+.header {
+    width: 100vw;
+    height: 10vh;
+    background-color: var(--lightteal);
+    box-shadow: 0 2px 4px rgb(0,0,0, 0.1);
+}
+
+.lobbyPINcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-left: 4em;
+}
+
+.lobbyPINheader {
+    display: block;
+    text-align: left;
+    color: white;
+    font-weight: bold;
+}
+
+.lobbyPIN {
+    font-weight: bold;
+    font-size: 28px;
+    color: white;
+}
+
+.lobbyContent {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+}
+
+.startBtnWrapper {
+    width: 10%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.dinerContainer {
+    width: 10%;
+    height: 100%;
+    padding: 50px 50px;
+}
+
+.dinerCountWrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.dinerCountNumber {
+    font-weight: 800;
+    font-size: 32px;
+}
+
+.dinerCountText {
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.dinersCardsWrapper {
+    width: 80%;
+    height: 100%;
+    padding: 50px 50px;
+}
+
+.startBtn {
+  border: none;
+  cursor: pointer;
+  background-color: #111827;
+  color: #fafafa;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  min-height: 48px;
+  min-width: 120px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.startBtn:hover {
+  background-color: #1f2937;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  opacity: .8;
+}
+
+.startBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}

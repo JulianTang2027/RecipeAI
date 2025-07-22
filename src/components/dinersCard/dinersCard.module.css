@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto;
+}
+
+body, html {
+    overflow: hidden;
+}
+
+.dinersCard {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+  max-width: 200px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.dinersCard:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-color: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avatarContainer {
+  position: relative;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f3f4f6;
+}
+
+.userInfo {
+  flex: 1;
+}
+
+.userName {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 2px 0;
+  line-height: 1.2;
+}
+
+.userStatus {
+    font-size: 14px;
+    font-weight: 400;
+    color: #111827;
+    margin: 0 0 2px 0;
+}
+
+.badgeContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease-in-out;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+}
+
+.badgeIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.budgetBadge {
+  background-color: #f0fdf4;
+  color: #15803d;
+}
+
+.budgetBadge:hover {
+  background-color: #dcfce7;
+}
+
+.cuisineBadge {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.cuisineBadge:hover {
+  background-color: #dbeafe;
+}
+
+.distanceBadge {
+  background-color: #f9fafb;
+  color: #374151;
+}
+
+.distanceBadge:hover {
+  background-color: #f3f4f6;
+}
+
+@media (max-width: 768px) {
+  .dinersCard {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .badgeContainer {
+    gap: 6px;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+
+  .userName {
+    font-size: 16px;
+  }
+}
+
+.dinersCard:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.badge:focus {
+  outline: 1px solid #3b82f6;
+  outline-offset: 1px;
+}

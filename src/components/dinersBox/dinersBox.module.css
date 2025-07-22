@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    overflow: hidden;
+}
+
+.dinersBox {
+    width: 50vw;
+    height: 70vh;
+    background-color: var(--teal);
+    box-shadow: 0 0 15px rgb(0, 0, 0, 0.8);
+}
+
+.dinersBoxHeader {
+    font-weight: bold;
+    font-size: 28px;
+    text-align: center;
+}
