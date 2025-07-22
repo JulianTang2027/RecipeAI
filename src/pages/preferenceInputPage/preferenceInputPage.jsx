@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './preferenceInputPage.module.css';
 import { useNavigate } from 'react-router-dom';
+import { useFormContext } from '../../utilities/formContext';
 
 const PreferenceInputPage = () => {
     const lobbyPIN = "57982"
@@ -9,6 +10,20 @@ const PreferenceInputPage = () => {
     const [name, setName] = useState("")
     const [distance, setDistance] = useState("")
 
+    const { addDinerForm } = useFormContext();
+
+    const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addDinerForm({
+            name, 
+            cusines: selectedCuisines,
+            budget,
+            distance,
+        });
+        navigate('/lobby')
+    }
     const cuisineArr = [
         'American',
         'Thai',
@@ -30,11 +45,19 @@ const PreferenceInputPage = () => {
     ]
 
   const budgetOptions = [
-    { value: "$", label: "$", description: "Budget-friendly" },
-    { value: "$$", label: "$$", description: "Moderate" },
-    { value: "$$$", label: "$$$", description: "Upscale" },
-    { value: "$$$$", label: "$$$$", description: "Fine dining" },
-   ]
+    {value: "$", label: "$", description: "Budget-friendly"},
+    {value: "$$", label: "$$", description: "Moderate"},
+    {value: "$$$", label: "$$$", description: "Upscale"},
+    {value: "$$$$", label: "$$$$", description: "Fine Dining"}
+  ]
+
+  const handleCuisineChange = (cuisine) => {
+    setSelectedCuisines((prev) => {
+        return prev.includes(cuisine)
+            ? prev.filter((c) => c !== cuisine) 
+            : [...prev, cuisine];
+    })
+  }
 
     return (
         <div className={styles.preferenceInputPage}>
@@ -129,7 +152,7 @@ const PreferenceInputPage = () => {
                             </div>
                         </div>
 
-                        <button type="submit" className={styles.submitButton}></button>
+                        <button className={styles.submitButton} onClick={handleSubmit} type="submit">Submit</button>
                     </form>
                 </div>
             </div>
