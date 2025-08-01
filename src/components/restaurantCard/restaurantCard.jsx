@@ -1,7 +1,7 @@
-import { Star, MapPin, DollarSign, Utensils } from "lucide-react";
-import styles from "./recommendationsCard.module.css";
+import { Star, MapPin, DollarSign, Utensils, Heart } from "lucide-react";
+import styles from "./restaurantCard.module.css";
 
-const RecommendationsCard = ({ restaurant }) => {
+const RestaurantCard = ({ restaurant, votes = 0, onVote }) => {
     const {
         name,
         cuisine,
@@ -9,7 +9,8 @@ const RecommendationsCard = ({ restaurant }) => {
         rating,
         distance,
         description,
-        image
+        image,
+        tags = []
     } = restaurant;
 
     const renderStars = (rating) => {
@@ -34,7 +35,7 @@ const RecommendationsCard = ({ restaurant }) => {
     };
 
     return (
-        <div className={styles.recommendationsCard}>
+        <div className={styles.restaurantCard}>
             <div className={styles.imageContainer}>
                 <img
                     src={image}
@@ -71,13 +72,28 @@ const RecommendationsCard = ({ restaurant }) => {
 
                 <p className={styles.description}>{description}</p>
 
-                <div className={styles.actions}>
-                    <button className={styles.viewMenuBtn}>View Menu</button>
-                    <button className={styles.bookTableBtn}>Book Table</button>
+                {tags.length > 0 && (
+                    <div className={styles.tags}>
+                        {tags.map((tag, index) => (
+                            <span key={index} className={styles.tag}>
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                )}
+
+                <div className={styles.voteSection}>
+                    <div className={styles.voteCount}>
+                        <Heart className={styles.voteIcon} />
+                        <span>{votes} votes</span>
+                    </div>
+                    <button onClick={onVote} className={styles.voteBtn}>
+                        Vote
+                    </button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default RecommendationsCard;
+export default RestaurantCard; 

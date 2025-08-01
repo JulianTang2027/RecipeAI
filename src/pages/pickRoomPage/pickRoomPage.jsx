@@ -1,33 +1,64 @@
 import styles from './pickRoomPage.module.css';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const PickRoomPage = () => {
     const navigate = useNavigate();
+    const [roomId, setRoomId] = useState('');
+    const [joinRoomId, setJoinRoomId] = useState('');
+
+    const generateRoomId = () => {
+        return Math.random().toString(36).substring(2, 8).toUpperCase();
+    };
 
     const handleCreateClick = () => {
-        navigate('/preference');
+        const newRoomId = generateRoomId();
+        navigate(`/room/${newRoomId}/lobby`);
     }
 
     const handleJoinClick = (e) => {
-        const pin = e.target.value;
-
-        navigate('/preference');
+        e.preventDefault();
+        if (joinRoomId.trim()) {
+            navigate(`/room/${joinRoomId.trim()}/lobby`);
+        }
     }
 
     return (
         <div className={styles.pickRoomPage}>
+            <div className={styles.header}>
+                <h1>🍽️ ForkCast</h1>
+                <p>Decide where to eat with your group</p>
+            </div>
+            
             <div className={styles.optionsWrapper}>
                 <div className={styles.createRoom}>
-                    <button onClick={handleCreateClick}>Create a dining room!</button>
+                    <h2>Create a New Room</h2>
+                    <p>Start a new dining session</p>
+                    <button onClick={handleCreateClick} className={styles.createBtn}>
+                        Create Room
+                    </button>
                 </div>
+                
+                <div className={styles.divider}>
+                    <span>or</span>
+                </div>
+                
                 <div className={styles.joinRoom}>
-                    <div className={styles.joinRoomForm}>
-                        <span>Join an existing dining room!</span>
-                        <div className={styles.pinWrapper}>
-                            <input type='text' id='roomID' placeholder="Room PIN"></input>
-                            <button onClick={handleJoinClick} type='submit'>Enter</button>
-                        </div>
-                    </div>
+                    <h2>Join Existing Room</h2>
+                    <p>Enter the room code from your host</p>
+                    <form onSubmit={handleJoinClick} className={styles.joinRoomForm}>
+                        <input 
+                            type='text' 
+                            placeholder="Enter Room Code"
+                            value={joinRoomId}
+                            onChange={(e) => setJoinRoomId(e.target.value)}
+                            className={styles.roomInput}
+                            maxLength={6}
+                        />
+                        <button type='submit' className={styles.joinBtn}>
+                            Join Room
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
