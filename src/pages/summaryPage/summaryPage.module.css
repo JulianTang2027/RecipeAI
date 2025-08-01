@@ -52,16 +52,33 @@ body, html {
     padding: 50px 0;
 }
 
+.recommendationSummaryContainer {
+    width: 80%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 .recommendationSummaryHeader {
     color: #fafafa;
     font-weight: bold;
     font-size: 24px;
+    margin-bottom: 1rem;
 }
 
 .recommendationSummaryText {
-    color: var(lightgray);
+    color: #e5e7eb;
     font-weight: 400;
     font-size: 16px;
+    line-height: 1.6;
+}
+
+.recommendationsBtnContainer {
+    margin-top: 2rem;
 }
 
 .recommendationBtn {
@@ -82,4 +99,10 @@ body, html {
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     opacity: .8;
+}
+
+.recommendationBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #ccc;
 }

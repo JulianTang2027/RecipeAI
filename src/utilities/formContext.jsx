@@ -9,8 +9,12 @@ export const FormProvider = ({ children }) => {
     setDinerForms((prev) => [...prev, newForm]);
   };
 
+  const clearDinerForms = () => {
+    setDinerForms([]);
+  };
+
   return (
-    <FormContext.Provider value={{ dinerForms, addDinerForm }}>
+    <FormContext.Provider value={{ dinerForms, addDinerForm, setDinerForms, clearDinerForms }}>
       {children}
     </FormContext.Provider>
   );

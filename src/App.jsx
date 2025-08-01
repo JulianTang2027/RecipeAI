@@ -1,5 +1,4 @@
 import styles from './App.module.css'
-import UploadBox from './components/uploadBox/uploadBox'
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,23 +7,29 @@ import {
 import HomePage from './pages/homePage/homePage';
 import PickRoomPage from './pages/pickRoomPage/pickRoomPage';
 import LobbyPage from './pages/lobbyPage/lobby';
-import SummaryPage from './pages/summaryPage/summaryPage';
-import RecommendationsPage from './pages/recommendationsPage/recommendationsPage';
 import PreferenceInputPage from './pages/preferenceInputPage/preferenceInputPage';
+import GPTSummaryPage from './pages/gptSummaryPage/gptSummaryPage';
+import SuggestionsPage from './pages/suggestionsPage/suggestionsPage';
+import VoteResultsPage from './pages/voteResultsPage/voteResultsPage';
+import ChatWithGPTPage from './pages/chatWithGPTPage/chatWithGPTPage';
+import { FormProvider } from './utilities/formContext';
 
 function App() {
-
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage></HomePage>}></Route>
-        <Route path="/pick" element={<PickRoomPage></PickRoomPage>}></Route>
-        <Route path="/preference" element={<PreferenceInputPage></PreferenceInputPage>}></Route>
-        <Route path="/lobby" element={<LobbyPage></LobbyPage>}></Route>
-        <Route path="/summary" element={<SummaryPage></SummaryPage>}></Route>
-        <Route path="/recommendations" element={<RecommendationsPage></RecommendationsPage>}></Route>
-      </Routes>
-    </Router>
+    <FormProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/pick" element={<PickRoomPage />} />
+          <Route path="/room/:roomId/lobby" element={<LobbyPage />} />
+          <Route path="/room/:roomId/preferences" element={<PreferenceInputPage />} />
+          <Route path="/room/:roomId/summary" element={<GPTSummaryPage />} />
+          <Route path="/room/:roomId/suggestions" element={<SuggestionsPage />} />
+          <Route path="/room/:roomId/results" element={<VoteResultsPage />} />
+          <Route path="/room/:roomId/chat" element={<ChatWithGPTPage />} />
+        </Routes>
+      </Router>
+    </FormProvider>
   )
 }
 

@@ -1,66 +1,65 @@
 import React from 'react';
 import styles from './lobby.module.css';
 import DinersCard from '../../components/dinersCard/dinersCard';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useFormContext } from '../../utilities/formContext';
 
 const LobbyPage = () => {
-
+    const { dinerForms } = useFormContext();
     const navigate = useNavigate();
-
-    const cuisineArr = [
-        'American',
-        'Thai',
-        'Japanese',
-        'Mexican',
-        'Indian',
-        'Korean',
-        'Malaysian',
-        'British',
-        'Italian',
-        'French',
-        'Spanish'
-    ];
-
-    const priceArr = [
-        '$',
-        '$$',
-        '$$$',
-        '$$$$'
-    ]
-
-    const travelRange = [
-        'Nearby, I\'m tired.',
-        'Not too far, but willing to travel a bit!',
-        'Far!'
-    ]
-
-    const dinerCount = '5';
+    const { roomId } = useParams();
 
     const handleStartClick = () => {
+        navigate(`/room/${roomId}/summary`);
+    }
 
-        navigate('/summary')
+    const handleAddPreferences = () => {
+        navigate(`/room/${roomId}/preferences`);
     }
 
     return (
         <div className={styles.lobbyPage}>
             <div className={styles.header}>
                 <div className={styles.lobbyPINcontainer}>
-                    <span className={styles.lobbyPINheader}>Join the lobby at ForkCast.io</span>
-                    <span className={styles.lobbyPIN}>with lobby PIN 57892</span>
+                    <span className={styles.lobbyPINheader}>Room Code</span>
+                    <span className={styles.lobbyPIN}>{roomId}</span>
                 </div>
-                <div className={styles.lobbyContent}>
-                    <div className={styles.dinerContainer}>
-                        <div className={styles.dinerCountWrapper}>
-                            <span className={styles.dinerCountNumber}>{dinerCount}</span>
-                            <span className={styles.dinerCountText}>Diners</span>
+            </div>
+            <div className={styles.lobbyContent}>
+                <div className={styles.dinerContainer}>
+                    <div className={styles.dinerCountWrapper}>
+                        <span className={styles.dinerCountNumber}>{dinerForms.length}</span>
+                        <span className={styles.dinerCountText}>Participants</span>
+                    </div>
+                </div>
+                <div className={styles.dinersCardsWrapper}>
+                    {dinerForms.length > 0 ? (
+                        dinerForms.map((diner, index) => (
+                            <DinersCard
+                                key={index}
+                                name={diner.name || `Participant ${index + 1}`}
+                                budget={diner.budget ? diner.budget.length : 2}
+                                cuisine={diner.cusines && diner.cusines.length > 0 ? diner.cusines[0] : "Any"}
+                                distance={diner.distance || "2 km"}
+                            />
+                        ))
+                    ) : (
+                        <div className={styles.noDiners}>
+                            <p>No participants have joined yet...</p>
+                            <button onClick={handleAddPreferences} className={styles.addPreferencesBtn}>
+                                Add Your Preferences
+                            </button>
                         </div>
-                    </div>
-                    <div className={styles.dinersCardsWrapper}>
-                        <DinersCard></DinersCard>
-                    </div>
-                    <div className={styles.startBtnWrapper}>
-                        <button onClick={handleStartClick} className={styles.startBtn}>Start</button>
-                    </div>
+                    )}
+                </div>
+                <div className={styles.startBtnWrapper}>
+                    <button 
+                        onClick={handleStartClick} 
+                        className={styles.startBtn}
+                        disabled={dinerForms.length === 0}
+                    >
+                        Start Session
+                    </button>
                 </div>
             </div>
         </div>

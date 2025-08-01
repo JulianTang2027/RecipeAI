@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import styles from './preferenceInputPage.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFormContext } from '../../utilities/formContext';
 
 const PreferenceInputPage = () => {
-    const lobbyPIN = "57982"
+    const { roomId } = useParams();
     const [budget, setBudget] = useState("")
     const [selectedCuisines, setSelectedCuisines] = useState([]);
     const [name, setName] = useState("")
     const [distance, setDistance] = useState("")
+    const [mood, setMood] = useState("")
 
     const { addDinerForm } = useFormContext();
 
@@ -21,9 +22,11 @@ const PreferenceInputPage = () => {
             cusines: selectedCuisines,
             budget,
             distance,
+            mood,
         });
-        navigate('/lobby')
+        navigate(`/room/${roomId}/lobby`)
     }
+
     const cuisineArr = [
         'American',
         'Thai',
@@ -36,6 +39,14 @@ const PreferenceInputPage = () => {
         'Italian',
         'French',
         'Spanish'
+    ];
+
+    const moodOptions = [
+        { value: "excited", label: "Excited! 🎉", emoji: "🎉" },
+        { value: "hungry", label: "Hungry! 🍕", emoji: "🍕" },
+        { value: "casual", label: "Casual 😊", emoji: "😊" },
+        { value: "fancy", label: "Fancy! ✨", emoji: "✨" },
+        { value: "adventurous", label: "Adventurous! 🌟", emoji: "🌟" }
     ];
 
     const travelRange = [
@@ -63,8 +74,8 @@ const PreferenceInputPage = () => {
         <div className={styles.preferenceInputPage}>
             <div className={styles.header}>
                 <div className={styles.lobbyPINcontainer}>
-                    <span className={styles.lobbyPINlabel}>Lobby PIN:</span>
-                    <span className={styles.lobbyPINnumber}>{lobbyPIN}</span>
+                    <span className={styles.lobbyPINlabel}>Room Code:</span>
+                    <span className={styles.lobbyPINnumber}>{roomId}</span>
                 </div>
             </div>
             <div className={styles.content}>
@@ -88,6 +99,23 @@ const PreferenceInputPage = () => {
                                 className={styles.textInput}
                                 required
                             />
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label className={styles.label}>What's your mood?</label>
+                            <div className={styles.moodOptions}>
+                                {moodOptions.map((option) => (
+                                <button
+                                    key={option.value}
+                                    type="button"
+                                    onClick={() => setMood(option.value)}
+                                    className={`${styles.moodButton} ${mood === option.value ? styles.moodButtonActive : ""}`}
+                                >
+                                    <span className={styles.moodEmoji}>{option.emoji}</span>
+                                    <span className={styles.moodLabel}>{option.label}</span>
+                                </button>
+                                ))}
+                            </div>
                         </div>
                         
                         <div className={styles.inputGroup}>
@@ -152,7 +180,7 @@ const PreferenceInputPage = () => {
                             </div>
                         </div>
 
-                        <button className={styles.submitButton} onClick={handleSubmit} type="submit">Submit</button>
+                        <button className={styles.submitButton} onClick={handleSubmit} type="button">Add Your Preferences</button>
                     </form>
                 </div>
             </div>
