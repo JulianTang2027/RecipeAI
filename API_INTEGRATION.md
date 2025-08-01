@@ -8,7 +8,7 @@ Create a `.env` file in the root directory with your API keys:
 
 ```bash
 VITE_OPENAI_API_KEY=your_openai_api_key_here
-VITE_QLOO_API_KEY=your_qloo_api_key_here
+VITE_YELP_API_KEY=your_yelp_api_key_here
 ```
 
 ## OpenAI Integration
@@ -25,20 +25,19 @@ VITE_QLOO_API_KEY=your_qloo_api_key_here
 - **Location**: `src/utilities/api.js`
 - **Usage**: Called in `ChatWithGPTPage` component
 
-## Qloo Integration
+## Yelp Integration
 
 ### Restaurant Recommendations
 - **Function**: `getRestaurantRecommendations(preferences)`
-- **Purpose**: Fetches restaurant suggestions based on group preferences
+- **Purpose**: Fetches restaurant suggestions based on group preferences and user location
 - **Location**: `src/utilities/api.js`
 - **Usage**: Called in `SuggestionsPage` component
 
-### Current Implementation
-The Qloo API integration currently uses fallback data since the exact API structure may vary. In production, you would:
-
-1. Replace the mock API call with actual Qloo API endpoint
-2. Transform the response to match the expected format
-3. Handle API-specific error cases
+### Features
+- **Location-based search**: Uses browser geolocation to find nearby restaurants
+- **Preference filtering**: Filters by cuisine, budget, and distance preferences
+- **Fallback system**: Uses mock data if API fails or location is unavailable
+- **Error handling**: Graceful degradation with user-friendly error messages
 
 ## Error Handling
 

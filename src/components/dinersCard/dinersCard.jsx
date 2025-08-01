@@ -3,7 +3,7 @@ import { MapPin, DollarSign, Utensils } from "lucide-react"
 import styles from "./dinersCard.module.css"
 
 const DinersCard = ({
-  name = "Jules!",
+  name = "Participant",
   budget = 2,
   cuisine = "Thai",
   distance = "2 km",

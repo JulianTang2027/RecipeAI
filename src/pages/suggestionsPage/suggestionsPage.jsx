@@ -21,7 +21,6 @@ const SuggestionsPage = () => {
         try {
             setLoading(true);
             
-            // Prepare preferences for API call
             const preferences = {
                 participants: dinerForms.map(diner => ({
                     name: diner.name,
@@ -32,12 +31,11 @@ const SuggestionsPage = () => {
                 }))
             };
 
-            // Try to get recommendations from Qloo API
             let restaurantData;
             try {
                 restaurantData = await getRestaurantRecommendations(preferences);
             } catch (apiError) {
-                console.error('Qloo API failed, using fallback:', apiError);
+                console.error('Yelp API failed, using fallback:', apiError);
                 restaurantData = getFallbackRestaurants();
             }
             

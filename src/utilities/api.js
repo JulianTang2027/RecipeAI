@@ -13,6 +13,21 @@ const getApiKey = (keyName) => {
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+const getCurrentPosition = () => {
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+            reject(new Error('Geolocation is not supported by this browser'));
+            return;
+        }
+        
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 300000 // 5 minutes
+        });
+    });
+};
+
 export const generateGPTSummary = async (dinerForms) => {
     const maxRetries = 1;
     let retryCount = 0;
@@ -140,9 +155,9 @@ export const chatWithGPT = async (message, conversationHistory = []) => {
 
 export const getRestaurantRecommendations = async (preferences) => {
     try {
-        const apiKey = getApiKey('VITE_QLOO_API_KEY');
-        if (!apiKey) {
-            throw new Error('Qloo API key not found');
+        const yelpApiKey = getApiKey('VITE_YELP_API_KEY');
+        if (!yelpApiKey) {
+            throw new Error('Yelp API key not found');
         }
 
         const cuisines = preferences.participants.flatMap(p => p.cuisines || []);
@@ -159,18 +174,52 @@ export const getRestaurantRecommendations = async (preferences) => {
             ? Math.max(...distances.map(d => distanceMap[d] || 10))
             : 10;
 
-        console.log('Attempting Qloo API call with preferences:', {
-            cuisines,
-            avgBudget,
-            maxDistance
+        // Get user location
+        const position = await getCurrentPosition();
+        const { latitude, longitude } = position.coords;
+
+        // Build Yelp search parameters
+        const searchParams = new URLSearchParams({
+            latitude: latitude.toString(),
+            longitude: longitude.toString(),
+            radius: (maxDistance * 1609.34).toString(), // Convert miles to meters
+            categories: cuisines.join(','),
+            limit: '8',
+            sort_by: 'rating'
         });
 
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // Add price filter based on budget
+        if (avgBudget <= 1) searchParams.append('price', '1');
+        else if (avgBudget <= 2) searchParams.append('price', '1,2');
+        else if (avgBudget <= 3) searchParams.append('price', '2,3');
+        else searchParams.append('price', '3,4');
 
-        return getFallbackRestaurants();
+        const response = await axios.get('https://api.yelp.com/v3/businesses/search', {
+            headers: {
+                'Authorization': `Bearer ${yelpApiKey}`,
+                'Content-Type': 'application/json'
+            },
+            params: searchParams
+        });
+
+        return response.data.businesses.map((business, index) => ({
+            id: business.id,
+            name: business.name,
+            cuisine: business.categories?.[0]?.title || 'Various',
+            price: '$'.repeat(business.price?.length || 2),
+            rating: business.rating || 4.0,
+            distance: `${(business.distance / 1609.34).toFixed(1)} km`,
+            description: business.categories?.map(cat => cat.title).join(', ') || 'Great dining experience',
+            image: business.image_url || `https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=300&fit=crop&sig=${index}`,
+            tags: business.categories?.slice(0, 3).map(cat => cat.title.toLowerCase()) || ['recommended'],
+            address: business.location?.address1,
+            phone: business.phone
+        }));
+
     } catch (error) {
-        console.error('Error calling Qloo API:', error);
-        throw error;
+        console.error('Error calling Yelp API:', error);
+        console.log('Falling back to mock restaurants');
+        return getFallbackRestaurants();
     }
 };
 

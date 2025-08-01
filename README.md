@@ -43,7 +43,7 @@ ForkCast is a React-based web application that helps groups decide where to eat 
 - **Styling**: CSS Modules
 - **Icons**: Lucide React
 - **State Management**: React Context API
-- **APIs**: OpenAI GPT-3.5 Turbo, Qloo Restaurant API
+- **APIs**: OpenAI GPT-3.5 Turbo, Yelp Restaurant API
 - **HTTP Client**: Axios
 
 ## Getting Started
@@ -58,7 +58,7 @@ ForkCast is a React-based web application that helps groups decide where to eat 
    ```bash
    # API Keys
    VITE_OPENAI_API_KEY=your_openai_api_key_here
-   VITE_QLOO_API_KEY=your_qloo_api_key_here
+   VITE_YELP_API_KEY=your_yelp_api_key_here
    ```
 
 3. **Start development server**:
@@ -74,14 +74,14 @@ ForkCast is a React-based web application that helps groups decide where to eat 
 2. **Add Preferences**: Each diner enters their name, mood, cuisine preferences, budget, and travel distance
 3. **Lobby**: View all diners and their preferences in real-time
 4. **AI Summary**: GPT analyzes group preferences and provides personalized insights
-5. **Recommendations**: Get restaurant suggestions from Qloo API based on group preferences
+5. **Recommendations**: Get restaurant suggestions from Yelp API based on group preferences and location
 6. **Voting**: Vote on favorite restaurants and see results
 7. **Chat with AI**: Ask follow-up questions or request different suggestions
 
 ## Key Components
 
 - **Form Context**: Manages diner data across the application
-- **API Integration**: OpenAI GPT for summaries and chat, Qloo for restaurant recommendations
+- **API Integration**: OpenAI GPT for summaries and chat, Yelp for location-based restaurant recommendations
 - **Recommendation Engine**: Analyzes group preferences to suggest restaurants
 - **Responsive Design**: Works on desktop and mobile devices
 - **Modern UI**: Clean, intuitive interface with smooth animations
